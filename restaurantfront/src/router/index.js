@@ -1,22 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import TableComponent from '../components/AdminComponents/TableComponent.vue'
 //import AdminView from '../views/AdminView'
 
 const routes = [
 
   //forma #1 de rutas----------------------------------------------------------
   {
-    path: '/admin/homead',
+    path: '/admin/home',
     name: 'HomeAdmin',
-    component: () => import( '../views/AdminView/HomeAdminView.vue')
+    component: TableComponent
     
   },
 
-  //forma #2 de rutas-----------------RUTAS DE LAS NUEVAS VISTAS DE AUTH-------------------------
- /* {
-    path: '/Login',
-    name: 'Ingresar',
-    component: () => import(/* webpackChunkName: "about" */ /*'../views/LoginView.vue')
-  },*/
 
 ]
 
