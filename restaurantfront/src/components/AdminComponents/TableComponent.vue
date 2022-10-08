@@ -3,54 +3,94 @@
         <h1>Detalles de una tabla desde un componente</h1>
     </div>
 
-    <body class="flex items-center justify-center">
-	<div class="container">
-		<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
-			<thead class="text-white">
-				<tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-					<th class="p-3 text-left">Name</th>
-					<th class="p-3 text-left">Email</th>
-					<th class="p-3 text-left" width="110px">Actions</th>
-				</tr>
-				<tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-					<th class="p-3 text-left">Name</th>
-					<th class="p-3 text-left">Email</th>
-					<th class="p-3 text-left" width="110px">Actions</th>
-				</tr>
-                <tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                  <th class="p-3 text-left">Name</th>
-                  <th class="p-3 text-left">Email</th>
-                  <th class="p-3 text-left" width="110px">Actions</th>
-              </tr>
-                <tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                  <th class="p-3 text-left">Name</th>
-                  <th class="p-3 text-left">Email</th>
-                  <th class="p-3 text-left" width="110px">Actions</th>
-              </tr>
-			</thead>
-			<tbody class="flex-1 sm:flex-none">
-				<tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-					<td class="border-grey-light border hover:bg-gray-100 p-3">John Covv</td>
-					<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">contato@johncovv.com</td>
-					<td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">Delete</td>
-				</tr>
-				<tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-					<td class="border-grey-light border hover:bg-gray-100 p-3">Michael Jackson</td>
-					<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">m_jackson@mail.com</td>
-					<td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">Delete</td>
-				</tr>
-                <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                    <td class="border-grey-light border hover:bg-gray-100 p-3">Julia</td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">julia@mail.com</td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">Delete</td>
+	<section>
+		<div class="table w-full p-2">
+        <table class="w-full border">
+            <thead>
+                <tr class="bg-gray-50 border-b">
+                    <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                        <div class="flex items-center justify-center">
+                            ID
+                        </div>
+                    </th>
+                    <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                        <div class="flex items-center justify-center">
+                            Name
+                        </div>
+                    </th>
+                    <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                        <div class="flex items-center justify-center">
+                            Email
+                        </div>
+                    </th>
+                    <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                        <div class="flex items-center justify-center">
+                            Address
+
+                        </div>
+                    </th>
+                    <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                        <div class="flex items-center justify-center">
+                            Action
+                        </div>
+                    </th>
                 </tr>
-                <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                  <td class="border-grey-light border hover:bg-gray-100 p-3">Martin Madrazo</td>
-                  <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">martin.madrazo@mail.com</td>
-                  <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">Delete</td>
+            </thead>
+            <tbody>
+                <tr class="bg-gray-100 text-center border-b text-sm text-gray-600">
+    
+                    <td class="p-2 border-r">1</td>
+                    <td class="p-2 border-r">John Doe</td>
+                    <td class="p-2 border-r">john@gmail.com</td>
+                    <td class="p-2 border-r">Sydney, Australia</td>
+                    <td>
+                        <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Editar</a>
+                        <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Eliminar</a>
+                    </td>
                 </tr>
-			</tbody>
-		</table>
-	</div>
-</body>
+                <tr class="bg-gray-100 text-center border-b text-sm text-gray-600">
+                    <td class="p-2 border-r">2</td>
+                    <td class="p-2 border-r">Adam Smith</td>
+                    <td class="p-2 border-r">adam@gmail.com</td>
+                    <td class="p-2 border-r">Sydney, Australia</td>
+                    <td>
+                        <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Editar</a>
+                        <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Eliminar</a>
+                    </td>
+                </tr>
+                <tr class="bg-gray-100 text-center border-b text-sm text-gray-600">
+                    <td class="p-2 border-r">3</td>
+                    <td class="p-2 border-r">Jean Doe</td>
+                    <td class="p-2 border-r">jean@gmail.com</td>
+                    <td class="p-2 border-r">Sydney, Australia</td>
+                    <td>
+                        <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Editar</a>
+                        <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Eliminar</a>
+                    </td>
+                </tr>
+                <tr class="bg-gray-100 text-center border-b text-sm text-gray-600">
+                    <td class="p-2 border-r">3</td>
+                    <td class="p-2 border-r">Jean Doe</td>
+                    <td class="p-2 border-r">jean@gmail.com</td>
+                    <td class="p-2 border-r">Sydney, Australia</td>
+                    <td>
+                        <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit</a>
+                        <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</a>
+                    </td>
+                </tr>
+                <tr class="bg-gray-100 text-center border-b text-sm text-gray-600">
+                    <td class="p-2 border-r">3</td>
+                    <td class="p-2 border-r">Jean Doe</td>
+                    <td class="p-2 border-r">jean@gmail.com</td>
+                    <td class="p-2 border-r">Sydney, Australia</td>
+                    <td>
+                        <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit</a>
+                        <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+	</section>
 </template>
+

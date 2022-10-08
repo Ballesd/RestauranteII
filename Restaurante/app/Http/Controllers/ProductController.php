@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Models\Product;
-
 
 class ProductController extends Controller
 {
@@ -26,6 +23,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,16 +36,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:50',
-            'description' => 'string|max:255',
-            'price' => 'required|integer|min:2',
-            'image' => 'string',
-            'type' => 'required|string',
-
-        ]);
-
         $producto = new Product();
         $producto->name = $request->name;
         $producto->description = $request->description;
@@ -53,14 +44,8 @@ class ProductController extends Controller
         $producto->type = $request->type;
 
         $producto->save();
-        
-
-        /*Probar la respuesta en caso de error
-        if($validator->fails()){
-            return \response('Algunos campos son nulos o tienen información inconsistente');
-        }*/
-        
     }
+
     /**
      * Display the specified resource.
      *
@@ -92,23 +77,13 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        /*$validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:50',
-            'description' => 'string|max:255',
-            'price' => 'required|integer|min:2',
-            'image' => 'string',
-            'type' => 'required|string',
-
-        ]);*/
-
         $producto = Product::findOrFail($request->id);
-
         $producto->name = $request->name;
         $producto->description = $request->description;
         $producto->price = $request->price;
         $producto->image = $request->image;
         $producto->type = $request->type;
-
+        
         $producto->save();
 
         return $producto;
@@ -123,6 +98,6 @@ class ProductController extends Controller
     public function destroy(Request $request)
     {
         $producto = Product::destroy($request->id);
-        return($producto);
+        return $producto;
     }
 }
