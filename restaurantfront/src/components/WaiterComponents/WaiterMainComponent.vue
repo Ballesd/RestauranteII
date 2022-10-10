@@ -65,10 +65,9 @@ const callProducts = (type) => {
             break;
     }
 }
-
-
-
 getProducts();
+
+
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';  
-import TableComponent from '../components/AdminComponents/TableComponent.vue';
-import MainComponent from '../components/WaiterComponents/MainComponent.vue';
+import TableComponent from '../components/AdminComponents/AdminTableComponent.vue';
+import MainComponent from '../components/WaiterComponents/WaiterMainComponent.vue';
 //import AdminView from '../views/AdminView'
 
 const routes = [
