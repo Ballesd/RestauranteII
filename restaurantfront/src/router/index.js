@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import TableComponent from '../components/AdminComponents/TableComponent.vue'
+import { createRouter, createWebHistory } from 'vue-router';  
+import TableComponent from '../components/AdminComponents/TableComponent.vue';
+import MainComponent from '../components/WaiterComponents/MainComponent.vue';
 //import AdminView from '../views/AdminView'
 
 const routes = [
@@ -9,6 +10,12 @@ const routes = [
     path: '/admin/home',
     name: 'HomeAdmin',
     component: TableComponent
+    
+  },
+  {
+    path: '/waiter',
+    name: 'HomeWaiter',
+    component: MainComponent
     
   },
 
