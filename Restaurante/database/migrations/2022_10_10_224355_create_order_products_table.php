@@ -17,6 +17,7 @@ class CreateOrderProductsTable extends Migration
             $table->id();
             $table->integer('quantity');
             $table->integer('subtotal');
+
             $table->foreignId('order')
                 ->constrained('orders')
                 ->nullable()

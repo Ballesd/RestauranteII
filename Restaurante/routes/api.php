@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticuloController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,12 +14,6 @@ use App\Http\Controllers\ArticuloController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-Route::get('/products', 'App\Http\Controllers\ProductController@index'); //Muestra un producto
-Route::post('/products', 'App\Http\Controllers\ProductController@store'); //Crea un producto
-Route::put('/products/{id}', 'App\Http\Controllers\ProductController@update'); //Edita los datos
-Route::delete('/products/{id}', 'App\Http\Controllers\ProductController@destroy'); //Borra datos 

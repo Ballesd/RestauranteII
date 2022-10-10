@@ -19,13 +19,13 @@ class CreateProductsTable extends Migration
             $table->string('description',200)->nullable();
             $table->integer('price');
             $table->string('image')->nullable();
-            $table->unsignedInteger('type');
-
+            
             $table->foreignId('type')
-                ->constrained('categories')
-                ->nullable()
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
+            ->constrained('categories')
+            ->nullable()
+            ->nullOnDelete()
+            ->cascadeOnUpdate();
+
 
             $table->timestamps();
         });
