@@ -14,12 +14,11 @@ class CategoryProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::where('type',1 )->get();
+        $products = Product::where('type',$request->id)->get();
         return response()->json($products);
     }
-
 
     /**
      * Show the form for creating a new resource.
