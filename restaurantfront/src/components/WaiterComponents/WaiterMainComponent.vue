@@ -4,20 +4,12 @@ import { ref } from 'vue';
 import  axios  from 'axios';
 
 const products = ref([]);
-
-function llamado(){
-    alert("hola");
-    axios.get('http://127.0.0.1:8000/api/products')
-    .then((res)=> {
-        products.value = res.data;
-        })
-    .catch((err)=>{
-        console.log("respuesta srve",err);
-    });
-}
+const ide  = ref(1);
 
 const getProducts = async () => {
-    await axios.get('http://127.0.0.1:8000/api/products')
+    await axios.post('http://127.0.0.1:8000/api/products',{
+        id:ide.value
+    })
     .then((res)=> {
         products.value = res.data;
         })
@@ -29,50 +21,49 @@ const getProducts = async () => {
 const callProducts = (type) => {
     switch (type) {
         case 'entrada':
-            llamado();
-            console.log("entro a entrada");
+            ide.value = 1;
             break;
         case 'ppicar':
-            console.log("entro a ppicar");
+            ide.value = 2;
             break;
         case 'asados':
-            console.log("entro a asados");
+            ide.value = 3;
             break;
         case 'dominyfest':
-            console.log("entro a dominyfest");
+            ide.value = 4;
             break;
         case 'pescados':
-            console.log("entro a pescados");
+            ide.value = 5;
             break;
         case 'comidarap':
-            console.log("entro a comidarap");
+            ide.value = 6;
             break;
         case 'postres':
-            console.log("entro a postres");
+            ide.value = 7;
             break;
         case 'bebicali':
-            console.log("entro a bebicali");
+            ide.value = 8;
             break;
         case 'addic':
-            console.log("entro a addic");
+            ide.value = 9;
             break;
         case 'patacones':
-            console.log("entro a patacones");
+            ide.value = 10;
             break;
         case 'bebidas':
-            console.log("entro a bebidas");
+            ide.value = 11;
             break;
         case 'cervezas':
-            console.log("entro a cervezas");
+            ide.value = 12;
             break;
         case 'licores':
-            console.log("entro a licores");
+            ide.value = 13;
             break;
         case 'vinos':
-            console.log("entro a vino");
+            ide.value = 14;
             break;
         case 'cocteles':
-            console.log("entro a cocteles");
+            ide.value = 15;
             break;
     }
 }
