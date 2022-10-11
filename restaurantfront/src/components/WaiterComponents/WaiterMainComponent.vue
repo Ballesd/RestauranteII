@@ -86,7 +86,7 @@ getProducts();
     <div class="gp-5 lg:px-20 lg:py-10 bg-gray-200">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-lg gap-3 sm:gap-8 text-center font-semibold">
 
-            <a href="" @click="getProducts()" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            <a href="" @click="getProducts('entrada')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Entradas</p>
             </a>
             <a href="" @click="callProducts('ppicar')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
