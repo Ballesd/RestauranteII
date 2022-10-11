@@ -16,10 +16,8 @@ class CategoryProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::where('type',$request->id)->get();
-        return response()->json($products);
+        //
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -84,5 +82,11 @@ class CategoryProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getProductsByCategory(Request $request)
+    {
+        $products = Product::where('type',$request->id)->get();
+        return response()->json($products);
     }
 }
