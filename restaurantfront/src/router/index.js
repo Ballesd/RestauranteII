@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';  
 import TableComponent from '../components/AdminComponents/AdminTableComponent.vue';
 import MainComponent from '../components/WaiterComponents/WaiterMainComponent.vue';
-//import AdminView from '../views/AdminView'
+import HelloWorld from '../components/MainIndex.vue';
 
 const routes = [
 
@@ -18,6 +18,11 @@ const routes = [
     component: MainComponent
     
   },
+  {
+    path: '/',
+    name: 'Home',
+    component: HelloWorld
+  }
 
 
 ]

@@ -4,9 +4,11 @@ import { ref } from 'vue';
 import  axios  from 'axios';
 
 const products = ref([]);
-const ide  = ref(1);
+const ide  = ref(0);
+const shoppLetter = ref([]);
 
-const getProducts = async () => {
+const getProducts = async (id) => {
+    ide.value = String(id)
     await axios.post('http://127.0.0.1:8000/api/products',{
         id:ide.value
     })
@@ -16,60 +18,24 @@ const getProducts = async () => {
     .catch((err)=>{
         console.log("respuesta srve",err);
     });
-}
-//Switch case de descion de que prodcuto solicitar, funciona de filtro
-const callProducts = (type) => {
-    switch (type) {
-        case 'entrada':
-            ide.value = 1;
-            break;
-        case 'ppicar':
-            ide.value = 2;
-            break;
-        case 'asados':
-            ide.value = 3;
-            break;
-        case 'dominyfest':
-            ide.value = 4;
-            break;
-        case 'pescados':
-            ide.value = 5;
-            break;
-        case 'comidarap':
-            ide.value = 6;
-            break;
-        case 'postres':
-            ide.value = 7;
-            break;
-        case 'bebicali':
-            ide.value = 8;
-            break;
-        case 'addic':
-            ide.value = 9;
-            break;
-        case 'patacones':
-            ide.value = 10;
-            break;
-        case 'bebidas':
-            ide.value = 11;
-            break;
-        case 'cervezas':
-            ide.value = 12;
-            break;
-        case 'licores':
-            ide.value = 13;
-            break;
-        case 'vinos':
-            ide.value = 14;
-            break;
-        case 'cocteles':
-            ide.value = 15;
-            break;
+};
+
+const listArticle = () =>{
+    let fill = JSON.parse(localStorage.getItem("shoppLetter"));
+    
+    if(fill !== null){
+        shoppLetter.value = fill;
     }
+    else{
+        shoppLetter.value = [];
+    }
+};
+
+const addLetterProduct = () => {
+    //
 }
-getProducts();
 
-
+listArticle();
 </script>
 
 <template>
@@ -77,62 +43,62 @@ getProducts();
     <div class="gp-5 lg:px-20 lg:py-10 bg-gray-200">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-lg gap-3 sm:gap-8 text-center font-semibold">
 
-            <a href="" @click="getProducts('entrada')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            <button @click="getProducts('1')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Entradas</p>
-            </a>
-            <a href="" @click="callProducts('ppicar')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('2')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Pá picar</p>
-            </a>
-            <a href="" @click="callProducts('asados')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('3')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Asados</p>
-            </a>
-            <a href="" @click="callProducts('dominyfest')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('4')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Domingos y Festivos</p>
-            </a>
-            <a href="" @click="callProducts('pescados')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('5')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Pescados</p>
-            </a>
-            <a href="" @click="callProducts('comidarap')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('6')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Comida rápida</p>
-            </a>
-            <a href="" @click="callProducts('postres')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('7')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Postres</p>
-            </a>
-            <a href="" @click="callProducts('bebicali')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('8')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Bebidas calientes</p>
-            </a>
-            <a href="" @click="callProducts('addic')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('9')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Adicionales</p>
-            </a>
-            <a href="" @click="callProducts('patacones')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('10')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Patacones</p>
-            </a>
-            <a href="" @click="callProducts('bebidas')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('11')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Bebidas</p>
-            </a>
-            <a href="" @click="callProducts('cervezas')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('12')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Cervezas</p>
-            </a>
-            <a href="" @click="callProducts('licores')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('13')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Licores</p>
-            </a>
-            <a href=""  @click="callProducts('vinos')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('14')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Vinos</p>
-            </a>
-            <a href="" @click="callProducts('cocteles')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
+            </button>
+            <button @click="getProducts('15')" class = "rounded-lg p-2 bg-white shadow-lg flex flex-col hover:bg-gradient-to-r hover:from-orange-200 hover:to-orange-500 hover:border border-black">
                 <p>Cocteles</p>
-            </a>
+            </button>
         </div>
     </div>
     <div class="p-5 lg:px-20 lg:py-10 bg-gray-200">
         
         <article class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-3xl gap-5 sm:gap-10 text-center font-bold">
             <div v-for="product in products" :key="product.name">    
-                <a href="">
+                <a>
                     <div class="h-72 rounded-2xl p-5 bg-white shadow-2xl flex flex-col hover:bg-gradient-to-r hover:from-red-200 hover:to-red-500 hover:border border-black">
                         <h1>{{ product.name}}</h1>
                         <div class="flex justify-center items-center h-full">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2103/2103848.png" alt="imagen del producto" class="h-36">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2103/2103848.png" alt="imagen del producto" class="h-32">
                         </div>
                     </div>
                 </a>
