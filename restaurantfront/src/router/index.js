@@ -3,33 +3,25 @@ import TableComponent from '../components/AdminComponents/AdminTableComponent.vu
 import MainComponent from '../components/WaiterComponents/WaiterMainComponent.vue';
 import HelloWorld from '../components/MainIndex.vue';
 
-const routes = [
 
-  //forma #1 de rutas----------------------------------------------------------
-  {
-    path: '/admin/home',
-    name: 'HomeAdmin',
-    component: TableComponent
-    
-  },
-  {
-    path: '/waiter',
-    name: 'HomeWaiter',
-    component: MainComponent
-    
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: HelloWorld
-  }
-
-
-]
-
-const router = createRouter({
+const routes = createRouter({
   history: createWebHistory(),
-  routes
-})
-
-export default router;
+  routes: [
+    {
+      path: '/admin/home',
+      name: 'HomeAdmin',
+      component: TableComponent
+    },
+    {
+      path: '/waiter',
+      name: 'HomeWaiter',
+      component: MainComponent
+    },
+    {
+      path: '/',
+      name: 'Home',
+      component: HelloWorld
+    }
+  ]
+});
+export default routes;
