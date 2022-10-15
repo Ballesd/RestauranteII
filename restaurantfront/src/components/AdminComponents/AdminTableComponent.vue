@@ -17,16 +17,16 @@ const inputs = {
 
 //Trae los productos totales del sistema
 const getProducts = async () => {
-    await axios.get('http://127.0.0.1:8000/api/products')
+    await axios.post('http://127.0.0.1:8000/api/products',{
+        id:1,
+    })
     .then((res)=> {
         products.value = res.data;
-    })
+        })
     .catch((err)=>{
-        Error.value = err.response.data;
-        console.log(Error.value);
         console.log("respuesta srve",err);
     });
-}
+};
 //Crea un nuevo producto
 const createProduct = async () => {
     consolo.log("entro a crear ---------------- ----------");
@@ -138,7 +138,7 @@ getProducts();
                 </table>
             </div>
         </div>
-        <div class="row">
+        <div class="row flex flex-col justify-center items-center">
             <div class="col">
                 <form class="w-full max-w-lg">
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -178,11 +178,11 @@ getProducts();
                         </div>
                     </div>
                     <div v-if="editar">
-                        <button class="btn btn-primary" @click="createProduct()">Agregar</button>
+                        <button class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" @click="createProduct()">Agregar</button>
                     </div>
                     <div v-else>
-                        <button class = "btn btn-primary" @click="editProduct()">Editar</button>
-                        <button class="btn btn-primary" @click="editar = false">Cancelar</button>
+                        <button class = "text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" @click="editProduct()">Editar</button>
+                        <button class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" @click="editar = false">Cancelar</button>
                     </div>
                 </form> 
             </div>
