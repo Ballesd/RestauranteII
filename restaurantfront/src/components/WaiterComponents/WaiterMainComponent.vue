@@ -6,6 +6,7 @@ import  axios  from 'axios';
 const products = ref([]);
 const ide  = ref(0);
 const shoppLetter = ref([]);
+const shoppLetter2 = ref([]);
 
 const isOpen = ref(false);
 
@@ -25,20 +26,25 @@ const getProducts = async (id) => {
 //Agrega los productos al carrito y tiene un uso de local storage
 const listArticle = () =>{
     let fill = JSON.parse(localStorage.getItem("shoppLetter"));
-    
+
     if(fill !== null){
         shoppLetter.value = fill;
-        console.log("shoppLetter",shoppLetter.value);
-        console.log("prodcutos",products.value);
     }
     else{
         shoppLetter.value = [];
-        console.log("shoppLetter else",shoppLetter.value);
     }
 };
 //Agrega los productos al carrito y tiene un uso de local storage
 const addLetterProduct = (producto) => {
     console.log("producto",producto);
+    //shoppLetter.value.unshift = producto;
+    shoppLetter2.value.push(producto);
+    localStorage.setItem("shoppLetter",JSON.stringify(producto));
+}
+
+//Elimina los productos del carrito y tiene un uso de local storage
+const dropLetterProduct = (producto) => {
+    shoppLetter2.value.pop(producto);
     localStorage.setItem("shoppLetter",JSON.stringify(producto));
 }
 
@@ -110,8 +116,29 @@ listArticle();
                         </svg>
                     </div>
                     <div class="mt-4">
-                        <div v-for="product in products" :key="product.name">
-                            <p class="mb-4 text-sm">{{product.name}}</p>
+                        <div class="md:px-32 py-8 w-full">
+                            <div class="shadow overflow-hidden rounded border-b border-gray-200">
+                                <table class="min-w-full bg-white">
+                                    <thead class="bg-gray-800 text-white">
+                                        <tr>
+                                            <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Plato</th>
+                                            <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Precio</th>
+                                            <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Edición</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-700">
+                                        <tr v-for="(item,index) in shoppLetter2" :key="index">
+                                            <td class="w-1/3 text-left py-3 px-4">{{item.name}}</td>
+                                            <td class="text-left py-3 px-4">{{item.price}}</td>
+                                            <td>
+                                                <button @click="dropLetterProduct(item)" class="bg-red-500 hover:bg-red-700 text-white h-1/3 py-1/3 px-1/3 rounded">
+                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <button @click="isOpen = false" class="text-amber-300 hover:text-white border border-amber-300 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-amber-200 dark:text-amber-200 dark:hover:text-white dark:hover:bg-amber-300 dark:focus:ring-amber-500">Cerrar</button>
                         <button class="text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-200 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">Enviar pedido</button>
@@ -123,16 +150,17 @@ listArticle();
     <div class="p-5 lg:px-20 lg:py-10 bg-gray-200">
         <article class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-3xl gap-5 sm:gap-10 text-center font-bold">
             <div v-for="product in products" :key="product.name">    
-                <a>
+                <button @click="addLetterProduct(product)">
                     <div class="h-72 rounded-2xl p-5 bg-white shadow-2xl flex flex-col hover:bg-gradient-to-r hover:from-red-200 hover:to-red-500 hover:border border-black">
                         <h1>{{ product.name}}</h1>
                         <div class="flex justify-center items-center h-full">
                             <img src="https://cdn-icons-png.flaticon.com/512/2103/2103848.png" alt="imagen del producto" class="h-32">
                         </div>
-                        <button @click="addLetterProduct(product)">Agregar al carrito</button>
                     </div>
-                </a>
+                </button>
             </div>
+            <!-- A few examples from Hero Icons -->
+
         </article>
     </div>
     
