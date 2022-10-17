@@ -36,17 +36,35 @@ const listArticle = () =>{
 };
 //Agrega los productos al carrito y tiene un uso de local storage
 const addLetterProduct = (producto) => {
-    console.log("producto",producto);
-    //shoppLetter.value.unshift = producto;
+    
+    for (let i = 0; i < shoppLetter2.value.length; i++) {
+        if(shoppLetter2.value[i] === producto){
+        //shoppLetter2.value[i].quantity += 1;
+            console.log("esta");
+        }
+ 
+    }
     shoppLetter2.value.push(producto);
     localStorage.setItem("shoppLetter",JSON.stringify(producto));
 }
 
 //Elimina los productos del carrito y tiene un uso de local storage
-const dropLetterProduct = (producto) => {
-    shoppLetter2.value.pop(producto);
-    localStorage.setItem("shoppLetter",JSON.stringify(producto));
+const dropLetterProduct = (index) => {
+    shoppLetter2.value.splice(index,1);
+    localStorage.setItem("shoppLetter",JSON.stringify(shoppLetter));
 }
+
+//El mesero abre una nueva orden o pedido hacia la cocina 
+const addNewOrder = async () => {
+    console.log("shoppLetter2",shoppLetter2.value);
+    const cantidad = ref(1);
+    const total = ref(0);
+    for(let i =  0; i < shoppLetter2.value.length; i++){
+        total.value += shoppLetter2.value[i].price;
+    }
+    console.log("total",total.value);
+}
+
 
 listArticle();
 </script>
@@ -131,7 +149,7 @@ listArticle();
                                             <td class="w-1/3 text-left py-3 px-4">{{item.name}}</td>
                                             <td class="text-left py-3 px-4">{{item.price}}</td>
                                             <td>
-                                                <button @click="dropLetterProduct(item)" class="bg-red-500 hover:bg-red-700 text-white h-1/3 py-1/3 px-1/3 rounded">
+                                                <button @click="dropLetterProduct(index)" class="bg-red-500 hover:bg-red-700 text-white h-1/3 py-1/3 px-1/3 rounded">
                                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                                 </button>
                                             </td>
@@ -141,7 +159,7 @@ listArticle();
                             </div>
                         </div>
                         <button @click="isOpen = false" class="text-amber-300 hover:text-white border border-amber-300 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-amber-200 dark:text-amber-200 dark:hover:text-white dark:hover:bg-amber-300 dark:focus:ring-amber-500">Cerrar</button>
-                        <button class="text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-200 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">Enviar pedido</button>
+                        <button @click="addNewOrder()" class="text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-200 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">Enviar pedido</button>
                     </div>
                 </div>
             </div>
