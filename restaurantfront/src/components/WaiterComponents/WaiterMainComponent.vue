@@ -46,6 +46,23 @@ const dropLetterProduct = (index) => {
     localStorage.setItem("shoppLetter",JSON.stringify(shoppLetter));
 }
 
+//Envia el pedido a la base de datos
+const sendOrder = async (total1,description1) => {
+    
+    await axios.post('http://127.0.0.1:8000/api/orders',{
+        description:description1,
+        total:total1,
+    })
+    .then((res)=> {
+        isOpen.value = false;
+        shoppLetter2.value = [];
+    })
+    .catch((err)=>{
+        console.log("respuesta srve",err);
+    });
+
+}
+
 //El mesero abre una nueva orden o pedido hacia la cocina 
 const addNewOrder = async () => {
 
@@ -72,10 +89,8 @@ const addNewOrder = async () => {
     vectindex.value = [];
     }
 
-    console.log("total",total.value);
-    console.log("description",description.value);
+    sendOrder(total.value,description.value);
 }
-
 
 listArticle();
 </script>
@@ -188,7 +203,6 @@ listArticle();
                     </div>
                 </button>
             </div>
-            <!-- A few examples from Hero Icons -->
 
         </article>
     </div>
