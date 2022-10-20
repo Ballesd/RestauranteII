@@ -36,14 +36,6 @@ const listArticle = () =>{
 };
 //Agrega los productos al carrito y tiene un uso de local storage
 const addLetterProduct = (producto) => {
-    
-    for (let i = 0; i < shoppLetter2.value.length; i++) {
-        if(shoppLetter2.value[i] === producto){
-        //shoppLetter2.value[i].quantity += 1;
-            console.log("esta");
-        }
- 
-    }
     shoppLetter2.value.push(producto);
     localStorage.setItem("shoppLetter",JSON.stringify(producto));
 }
@@ -56,13 +48,32 @@ const dropLetterProduct = (index) => {
 
 //El mesero abre una nueva orden o pedido hacia la cocina 
 const addNewOrder = async () => {
-    console.log("shoppLetter2",shoppLetter2.value);
-    const cantidad = ref(1);
-    const total = ref(0);
-    for(let i =  0; i < shoppLetter2.value.length; i++){
-        total.value += shoppLetter2.value[i].price;
+
+    let total = ref(0);
+    let description = ref("");
+    let vectindex = ref([]);
+    let idx = ref([]);
+    //Eliminamos los valores repetidos del pedido
+    let resul =  shoppLetter2.value.filter((item, index) => {
+        return shoppLetter2.value.indexOf(item) === index;
+    })
+
+    //Agregamos la cantidad de productos repetidos
+    for(let i =  0; i < resul.length; i++){
+
+        idx.value = shoppLetter2.value.indexOf(resul[i]);
+        while(idx.value != -1){ 
+            vectindex.value.push(idx.value);
+            idx.value = shoppLetter2.value.indexOf(resul[i], idx.value + 1);
+        }
+
+    total.value += vectindex.value.length * resul[i].price;
+    description.value += "\n - " + vectindex.value.length + " " + resul[i].name;
+    vectindex.value = [];
     }
+
     console.log("total",total.value);
+    console.log("description",description.value);
 }
 
 
