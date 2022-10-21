@@ -14,10 +14,12 @@ class CategoryProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        //
+        $productos = Product::all();
+        return $productos;
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +38,14 @@ class CategoryProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $producto = new Product();
+        $producto->name = $request->name;
+        $producto->description = $request->description;
+        $producto->price = $request->price;
+        $producto->image = $request->image;
+        $producto->type = $request->type;
+
+        $producto->save();
     }
 
     /**
@@ -68,9 +77,18 @@ class CategoryProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $producto = new Product();
+        $producto->name = $request->name;
+        $producto->description = $request->description;
+        $producto->price = $request->price;
+        $producto->image = $request->image;
+        $producto->type = $request->type;
+
+        $producto->save();
+
+        return $producto;
     }
 
     /**
@@ -79,11 +97,13 @@ class CategoryProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $producto = Product::destroy($request->id);
+        return $producto;
     }
 
+    //Trae los prodcutos dependiendo de la categoria
     public function getProductsByCategory(Request $request)
     {
         $products = Product::where('type',$request->id)->get();
