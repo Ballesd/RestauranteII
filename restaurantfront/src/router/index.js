@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';  
 import TableComponent from '../components/AdminComponents/AdminTableComponent.vue';
 import MainComponent from '../components/WaiterComponents/WaiterMainComponent.vue';
+import CookComponent from '../components/CookComponents/CookMainComponent.vue';
 import HelloWorld from '../components/MainIndex.vue';
 
 
@@ -16,6 +17,11 @@ const routes = createRouter({
       path: '/waiter',
       name: 'HomeWaiter',
       component: MainComponent
+    },
+    {
+      path: '/cook',
+      name: 'HomeCook',
+      component: CookComponent
     },
     {
       path: '/',

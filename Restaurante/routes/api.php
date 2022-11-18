@@ -21,7 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/products', 'App\Http\Controllers\CategoryProductController@getProductsByCategory');
 
 //Orders routes
-
 Route::get('/orders', 'App\Http\Controllers\OrderProductController@index'); //Trae todos los pedidos
 Route::post('/orders', 'App\Http\Controllers\OrderProductController@store'); //Crea un pedido
 Route::put('/orders/{id}', 'App\Http\Controllers\OrderProductController@update'); //Actualiza un pedido

@@ -18,7 +18,7 @@ import { ref } from 'vue';
             </a>
         </div>
         <div>    
-            <a href="">
+            <a href="../cook">
                 <div class="h-72 rounded-2xl p-5 bg-white shadow-2xl flex flex-col hover:bg-gradient-to-r hover:from-purple-200 hover:to-purple-500 hover:border border-black">
                     <h6>Cocinero</h6>
                     <div class="flex justify-center items-center h-full">
