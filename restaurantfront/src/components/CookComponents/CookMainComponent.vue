@@ -26,10 +26,11 @@ getOrders();
         <div>
             <h1 class="text-3xl font-bold text-center">Cocinero</h1>
         </div>
-        <div v-for="orden in orders" :key="orden.id">
-            <div
-                class='flex sm:flex-row flex-col space-y-2 sm:space-x-2 flex-row w-full items-center justify-center min-h-screen'>
-                <div
+        <div>
+            <!--grid md:grid-cols-2-->
+            <div 
+                class=' flex flex-col space-y-4 sm:space-x-2 flex-row items-center justify-center min-h-screen'>
+                <div v-for="orden in orders" :key="orden.id"
                     class='flex flex-wrap flex-row sm:flex-col justify-center items-center w-full sm:w-1/4 p-5 bg-white rounded-md shadow-xl border-l-4 border-purple-300'>
                     <div class="flex justify-between w-full">
                         <div>
@@ -51,11 +52,12 @@ getOrders();
                             {{ orden.description }}
                         </div>
                         <div class="font-bold text-xs text-center">
-                            {{orden.total}}
+                            precio: {{orden.total}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </template>

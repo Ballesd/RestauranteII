@@ -3,12 +3,13 @@
 import { ref } from 'vue';
 import  axios  from 'axios';
 
-const products = ref([]);
-const ide  = ref(0);
-const shoppLetter = ref([]);
-const shoppLetter2 = ref([]);
+const products = ref([]); //Se crea una variable que va a contener los productos
+const ide  = ref(0); //Se crea una variable que va a contener el id del producto
+const shoppLetter = ref([]); //Se crea una variable que va a contener el pedido de compras
+const shoppLetter2 = ref([]); //Se crea una variable que va a contener el pedido de compras
+const orderProducts = ref([]); //Se crea una variable que va a contener los productos de la orden
 
-const isOpen = ref(false);
+const isOpen = ref(false); //Se crea una variable que va a contener el estado del modal
 
 //Trae los productos con la API de la base de datos
 const getProducts = async (id) => {
@@ -46,16 +47,45 @@ const dropLetterProduct = (index) => {
     localStorage.setItem("shoppLetter",JSON.stringify(shoppLetter));
 }
 
+const addOrderProductInAPI = async (quantity1,subtotal1,order_id1,product_id1) => {
+    /*
+    console.log("cantidad",quantity1);
+    console.log("subtotal",subtotal1);
+    console.log("order_id",order_id1);
+    console.log("product_id",product_id1);
+*/
+    await axios.post('http://127.0.0.1:8000/api/orders/products',{
+        quantity:quantity1,
+        subtotal:subtotal1,
+        order_id:order_id1,
+        product_id:product_id1,
+    })
+    .then((res)=> {
+        //console.log("respuesta srve",res);
+    })
+    .catch((err)=>{
+        console.log("respuesta srve",err);
+    });
+}
+
 //Envia el pedido a la base de datos
 const sendOrder = async (total1,description1) => {
-    
+    let order_id = 0;
     await axios.post('http://127.0.0.1:8000/api/orders',{
         description:description1,
         total:total1,
     })
     .then((res)=> {
         isOpen.value = false;
+        order_id = res.data;
+        //console.log("IDE de ingreso de pedido",res.data);
+        //Ciclo que recorre orderProducts
+        for (let i = 0; i < orderProducts.value.length; i++) {
+            addOrderProductInAPI(orderProducts.value[i].quantity,orderProducts.value[i].subtotal,order_id,orderProducts.value[i].product_id);
+        }
+
         shoppLetter2.value = [];
+        orderProducts.value = [];
     })
     .catch((err)=>{
         console.log("respuesta srve",err);
@@ -66,17 +96,21 @@ const sendOrder = async (total1,description1) => {
 //El mesero abre una nueva orden o pedido hacia la cocina 
 const addNewOrder = async () => {
 
-    let total = ref(0);
-    let description = ref("");
-    let vectindex = ref([]);
-    let idx = ref([]);
+    let total = ref(0); //Variable que va a contener el total de la orden
+    let description = ref(""); //Variable que va a contener la descripcion de la orden (todos los pedidos con su cantidad)
+    let vectindex = ref([]); //Variable que va a contener los indices de los productos que se repiten en el pedido
+    let idx = ref([]); //Variable que va a contener los indices de los productos que se repiten en el pedido
+    
+    //Variables para el los campos de entidad relación en in objeto
+    let datalp = ref({});
+
     //Eliminamos los valores repetidos del pedido
     let resul =  shoppLetter2.value.filter((item, index) => {
         return shoppLetter2.value.indexOf(item) === index;
-    })
-
+    });
     //Agregamos la cantidad de productos repetidos
     for(let i =  0; i < resul.length; i++){
+
 
         idx.value = shoppLetter2.value.indexOf(resul[i]);
         while(idx.value != -1){ 
@@ -84,11 +118,20 @@ const addNewOrder = async () => {
             idx.value = shoppLetter2.value.indexOf(resul[i], idx.value + 1);
         }
 
-    total.value += vectindex.value.length * resul[i].price;
-    description.value += "\n - " + vectindex.value.length + " " + resul[i].name;
-    vectindex.value = [];
-    }
+        datalp.value = {
+            subtotal:vectindex.value.length * resul[i].price,
+            quantity:vectindex.value.length,
+            product_id:resul[i].id,
+        }
+        orderProducts.value.push(datalp.value); //Para entidad relación
 
+        total.value += vectindex.value.length * resul[i].price; //Para la orden
+        description.value += "\n - " + vectindex.value.length + " " + resul[i].name; //Para la orden
+        vectindex.value = [];
+
+    }
+    
+    //console.log("Orden de los productos pedidos",orderProducts.value);
     sendOrder(total.value,description.value);
 }
 
@@ -98,7 +141,7 @@ listArticle();
 <template>
 
     <div class="gp-5 lg:px-20 lg:py-10 bg-gray-200">
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 text-lg gap-3 sm:gap-8 text-center font-semibold">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 text-lg gap-3 sm:gap-8 text-center font-semibold">
 
             <button @click="getProducts('1')" class = "text-black bg-gradient-to-r from-teal-300 via-teal-400 to-teal-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-400 dark:focus:ring-teal-600 shadow-lg dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                 <span class=""> Entrada </span>
