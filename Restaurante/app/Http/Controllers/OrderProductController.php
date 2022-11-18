@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product; 
+use App\Models\OrderProduct;
 
 
 class OrderProductController extends Controller
@@ -42,6 +43,10 @@ class OrderProductController extends Controller
         $order->total = $request->total;
         $order->status = 1;
         $order->save();
+
+        //Sacar el id del la orden recien guardada
+        $id = $order->id;
+        return response()->json($id);
     }
 
     /**
@@ -94,5 +99,18 @@ class OrderProductController extends Controller
     }
     public function getOrdersByProduct(Request $request){
         //
+    }
+
+    //Funcion para guardar los productos de la orden
+    public function saveOrderProduct(Request $request){
+
+        $orderProduct = new OrderProduct();
+
+        $orderProduct->quantity = $request->quantity;
+        $orderProduct->subtotal = $request->subtotal;
+        $orderProduct->order_id = $request->order_id;
+        $orderProduct->product_id = $request->product_id;
+        
+        $orderProduct->save();
     }
 }
