@@ -243,6 +243,7 @@ listArticle();
                         <div class="flex justify-center items-center h-full">
                             <img src="https://cdn-icons-png.flaticon.com/512/3183/3183463.png" alt="imagen del producto" class="h-32">
                         </div>
+                        <p class="text-2xl">{{ product.price}}</p> 
                     </div>
                 </button>
             </div>

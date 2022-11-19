@@ -24,4 +24,4 @@ Route::post('/products', 'App\Http\Controllers\CategoryProductController@getProd
 Route::get('/orders', 'App\Http\Controllers\OrderProductController@index'); //Trae todos los pedidos
 Route::post('/orders', 'App\Http\Controllers\OrderProductController@store'); //Crea un pedido
 Route::put('/orders/{id}', 'App\Http\Controllers\OrderProductController@update'); //Actualiza un pedido
-Route::post('orders/orders/products', 'App\Http\Controllers\OrderProductController@saveOrderProduct'); //Agrega un producto a un pedido
+Route::post('orders/products', 'App\Http\Controllers\OrderProductController@saveOrderProduct'); //Agrega un producto a un pedido
